@@ -70,7 +70,6 @@ function FileManager() {
       }
     });
 
-    console.log("ver archivo", data);
     if (!archivo) return;
     const archivosTema = archivos.filter((a) => a.tema === data.tema);
     if (archivosTema.length === 1) {
@@ -87,11 +86,9 @@ function FileManager() {
   };
 
   const manejarEliminar = (archivo) => {
-    console.log(archivo);
     const archivosTema = archivos.filter((a) => a.tema === archivo.tema);
     if (archivosTema.length > 1) {
       let datos = { tema: archivo.tema, archivo };
-      console.log(datos);
       setAccionesPendientes([
         ...accionesPendientes,
         { tipo: "eliminar", datos },
@@ -126,7 +123,6 @@ function FileManager() {
         }
       } else if (tipo === "reemplazar") {
         try {
-          console.log("remplazo", datos);
           await axios.put(`http://localhost:3000/files/update/${datos.tema}`);
           nuevaLista = nuevaLista.map((a) =>
             a.tema === datos.tema
@@ -199,8 +195,6 @@ function FileManager() {
     }
   };
 
-  console.log("archivos", archivos);
-  console.log("accionesPendientes", accionesPendientes);
   return (
     <div style={{ marginLeft: "20px", marginRight: "30px" }}>
       <h1>Gestión de Archivos</h1>
